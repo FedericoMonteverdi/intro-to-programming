@@ -23,7 +23,7 @@ public class UnitTest1
     }
 
     [Theory]
-    [InlineData("Robert", "Smith", "Smith, Robert")]
+    [InlineData("Bob", "Smith", "Smith, Bob")]
     [InlineData("Luke", "Skywalker", "Skywalker, Luke")]
     public void CanFormatAnyName(string firstName, string lastName, string expecting)
     {

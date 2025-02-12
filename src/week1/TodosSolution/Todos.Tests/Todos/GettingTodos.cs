@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using Alba;
 using Todos.Api.Todos;
+
 namespace Todos.Tests.Todos;
 public class GettingTodos
 {
+
     [Fact]
-    public async Task GetsAOkstatusCode()
+    public async Task GetsAOkStatusCode()
     {
         var host = await AlbaHost.For<Program>();
-
+        // a bit of time between these two.
         await host.Scenario(api =>
         {
             api.Get.Url("/todos");
-            api.StatusCodeShouldBeOk();
+            api.StatusCodeShouldBeOk(); // 200
+
         });
     }
 
@@ -43,7 +41,7 @@ public class GettingTodos
 
         });
 
-        var listOfTodos = getResponse.ReadAsJson<List<TodoListItem>>();
+       var listOfTodos = getResponse.ReadAsJson<List<TodoListItem>>();
 
         Assert.NotNull(listOfTodos);
 
