@@ -1,4 +1,4 @@
-﻿
+
 
 
 namespace Banking.Domain;
@@ -6,7 +6,15 @@ namespace Banking.Domain;
 
 public class Account
 {
-    private decimal _currentBalance = 5000;
+    private ICalculateBonusesForDepositsOnAccounts _bonusCalculator;
+
+  public Account(ICalculateBonusesForDepositsOnAccounts bonusCalculator)
+  {
+    _currentBalance = 5000M;
+    _bonusCalculator = bonusCalculator;
+  }
+
+  private decimal _currentBalance;
 
     // Queries (methods where we ask for stuff)
     public decimal GetBalance()
@@ -15,8 +23,11 @@ public class Account
     }
     public void Deposit(decimal amountToDeposit)
     {
+        
         CheckTransactionAmount(amountToDeposit);
-        _currentBalance += amountToDeposit;
+
+        var bonus = _bonusCalculator.CalculateBonusForDeposit( _currentBalance, amountToDeposit);
+        _currentBalance += amountToDeposit + bonus;
     }
 
     // Commands - telling our account to do some work.
