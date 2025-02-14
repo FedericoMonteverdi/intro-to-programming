@@ -1,32 +1,30 @@
-﻿using System.Text;
 
 public class Calculator
 {
-    public int Add(string numbers)
+  public int Add(string numbers)
+  {
+    if (numbers == "")
     {
-        if (numbers == "") {
-            return 0;
-        }
-        
-        if (numbers.Length > 0 && numbers.Length < 10 && !numbers.Contains(",") && !numbers.Contains("\n"))
-        {
-            return int.Parse(numbers);
-        }
-
-        char[] delimeters = new char[] { ',', '\n' };
-
-        if (numbers.Contains(","))
-        {
-            string[] parts = numbers.Split(',');
-            int sum = 0;
-            foreach (string part in parts)
-            {
-                sum += int.Parse(part);
-            }
-            return sum;
-        }
-
-
-        return 0;
+      return 0;
     }
+
+    return numbers.Split(',', '\n').Select(int.Parse).Sum();
+
+   // var splitnumbers = numbers.Split(',', '\n');
+   // var numbersConverted = splitnumbers.Select(int.Parse);
+   //// splitnumbers[0] = "999";
+   // var sum = numbersConverted.Sum();
+   // return sum;
+
+    //if (numbers.Contains(','))
+    //{
+    //  var commaAt = numbers.IndexOf(',');
+    //  var firstPart = numbers[..commaAt];
+    //  var secondPart = numbers[(commaAt + 1)..];
+
+    //  return int.Parse(firstPart) + int.Parse(secondPart);
+    //}
+   
+   
+  }
 }
