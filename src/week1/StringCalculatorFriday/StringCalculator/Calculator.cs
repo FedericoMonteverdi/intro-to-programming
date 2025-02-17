@@ -15,6 +15,13 @@ public class Calculator
 
         char[] delimeters = new char[] { ',', '\n' };
 
+        if (numbers.StartsWith("//")) 
+        {
+            char customDelimiter = numbers[2];
+            delimeters = new char[] {',', '\n', customDelimiter };
+            numbers 
+        }
+
         string[] parts = numbers.Split(delimeters);
         int sum = 0;
         foreach (string part in parts)
