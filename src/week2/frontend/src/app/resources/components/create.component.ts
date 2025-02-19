@@ -27,20 +27,24 @@ import { ResourceListItemCreateModel } from '../types';
             formControlName="title"
           />
           @let titleControl = form.controls.title;
-          @if (titleControl.invalid && (titleControl.dirty || titleControl.touched)) {
-            <div class="alert alert-error">
-              @if (titleControl.hasError('required')) {
-                <p>Title required.</p>
-              }
-              @if (titleControl.hasError('minlength')) {
-                @let mlError = titleControl.getError('minlength');
-                  <p>
-                    The title must be at least {{ mlError['requiredLength'] }} characters.
-                  </p>
+    @if (titleControl.invalid && (titleControl.dirty || titleControl.touched)) {
+      <div class="alert alert-error">
+        @if (titleControl.hasError('required')) {
+          <p>The title is required.</p>
+        }
+        @if (titleControl.hasError('minlength')) {
+          @let mlError = titleControl.getError('minlength');
+          <p>
+            The title must be at least {{ mlError['requiredLength'] }} characters.
+          </p>
         }
         @if (titleControl.hasError('maxlength')) {
           <p>The title can't be more than 100 characters.</p>
         }
+      </div>
+    }
+
+
         </label>
       </div>
       <div class="form-control">
